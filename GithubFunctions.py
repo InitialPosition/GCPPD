@@ -54,7 +54,7 @@ class GithubImageDownloadConnection:
             if commit.author not in self.DOWNLOAD_LIST:
                 self.DOWNLOAD_LIST.append(commit.author)
 
-        print(f'Collected {len(self.DOWNLOAD_LIST)} authors(s).')
+        print(f'Collected {len(self.DOWNLOAD_LIST)} author(s).')
 
     def download_all_collaborator_pictures(self):
         # create dir if it doesn't exist
