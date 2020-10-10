@@ -46,3 +46,6 @@ Collected 1 user(s).
 Downloading avatar for user "InitialPosition" (https://avatars0.githubusercontent.com/u/23456524?v=4)...
 File download complete.
 ```
+
+### Known problems
+- Due to GitHub API restrictions, if you don't have push permissions in the target repository, you can only fetch avatars of users that forked the main repository.
