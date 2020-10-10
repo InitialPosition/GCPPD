@@ -3,7 +3,7 @@ This script automatically downloads (or attempts to download) all user avatars a
 Its intended usage is to make more interesting gource visualizations easier.
 
 ### Usage
-1. Create a personal github access token. This can be done [here](https://github.com/settings/tokens). (Your token needs the `public_repo` permission.)
+1. Create a personal github access token. This can be done [here](https://github.com/settings/tokens). Your token does not need any permissions.
 1. Install Python 3. You can download the latest version [here](https://www.python.org/downloads/). If you're unsure whether you have Python installed, run `python3 --version` in your terminal. If it returns a version number, you are good to go.
 1. (optional but recommended) Create a new virtual environment by typing `python3 -m venv <folder name>`. If this returns an error, make sure that the python3 venv tool is installed by running `sudo apt install python3-venv`. If you decide to not create a virtual environment, continue at step 5.
 1. Activate the virtual environment by typing `source <folder name>/bin/activate`.
@@ -46,6 +46,3 @@ Collected 1 user(s).
 Downloading avatar for user "InitialPosition" (https://avatars0.githubusercontent.com/u/23456524?v=4)...
 File download complete.
 ```
-
-### Known problems
-- Due to GitHub API restrictions, if you don't have push permissions in the target repository, you can only fetch avatars of users that forked the main repository.

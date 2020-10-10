@@ -24,8 +24,11 @@ if args.repository is None:
 # generate github instance
 github = GithubImageDownloadConnection(args.token)
 
-# get user instance
+# set user instance
 github.set_user(args.user)
 
 # get collaborators for project
-github.get_project_collaborators(args.repository)
+github.get_project_commits(args.repository)
+
+# download all pictures from collected authors
+github.download_all_collaborator_pictures()

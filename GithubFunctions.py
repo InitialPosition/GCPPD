@@ -45,25 +45,18 @@ class GithubImageDownloadConnection:
             print('Repository not found. Aborting...')
             exit(-1)
 
-    def get_project_collaborators(self, project_name):
+    def get_project_commits(self, project_name):
         project = self.get_repo(project_name)
 
-        print('Collecting repository collaborators...')
+        print('Collecting authors from repository commits...')
 
-        try:
-            for collaborator in project.get_collaborators():
-                self.DOWNLOAD_LIST.append(collaborator)
-        except GithubException as e:
-            if e.status == 403:
-                print('You don\'t have push rights for this repository. Falling back to repo forks...')
+        for commit in project.get_commits():
+            if commit.author not in self.DOWNLOAD_LIST:
+                self.DOWNLOAD_LIST.append(commit.author)
 
-                for fork in project.get_forks():
-                    self.DOWNLOAD_LIST.append(fork.owner)
+        print(f'Collected {len(self.DOWNLOAD_LIST)} authors(s).')
 
-        print(f'Collected {len(self.DOWNLOAD_LIST)} user(s).')
-        self.download_all_collab_pictures()
-
-    def download_all_collab_pictures(self):
+    def download_all_collaborator_pictures(self):
         # create dir if it doesn't exist
         if isdir('images') is False:
             print('Creating image directory...')
@@ -74,15 +67,23 @@ class GithubImageDownloadConnection:
             mkdir(f'images/{self.REPO}')
 
         for user in self.DOWNLOAD_LIST:
+            if user is None:
+                continue
+
             print(f'Downloading avatar for user "{user.login}" ({user.avatar_url})...')
 
-            urlretrieve(user.avatar_url, f'images/{self.REPO}/{user.login}')
+            if user.name is not None:
+                save_name = user.name
+            else:
+                save_name = user.login
+
+            urlretrieve(user.avatar_url, f'images/{self.REPO}/{save_name}')
 
             # file format handling
-            file_format = what(f'images/{self.REPO}/{user.login}')
+            file_format = what(f'images/{self.REPO}/{save_name}')
             if file_format is None:
                 file_format = 'jpg'
 
-            rename(f'images/{self.REPO}/{user.login}', f'images/{self.REPO}/{user.login}.{file_format}')
+            rename(f'images/{self.REPO}/{save_name}', f'images/{self.REPO}/{save_name}.{file_format}')
 
         print('File download complete.')
