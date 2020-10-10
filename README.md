@@ -16,7 +16,7 @@ Its intended usage is to make more interesting gource visualizations easier.
 ### Example
 Using parameters
 ```
-$ python3 main.py --token TOKEN_HERE --user InitialPosition --repository GCPPD
+$ python3 gcppd.py --token TOKEN_HERE --user InitialPosition --repository GCPPD
 Getting user instance for "InitialPosition"...
 Done.
 Searching for repository "GCPPD"...
@@ -29,7 +29,7 @@ File download complete.
 
 Without parameters
 ```
-$ python3 main.py 
+$ python3 gcppd.py 
 GitHub Access Token: 
 Repository Owner: InitialPosition
 Repository Name: GCPPD
